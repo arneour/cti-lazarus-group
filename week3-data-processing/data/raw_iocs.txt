@@ -1,0 +1,48 @@
+# ============================================================================
+# RAW IOC COLLECTION — WannaCry (Lazarus Group) — collected in Week 2
+# Copied as-is from VirusTotal, Maltego and vendor reports (unprocessed).
+# Format:  <indicator>   # <source> | key=value ...
+# This file is intentionally messy: defanged values, mixed case, duplicates,
+# whitespace, benign noise and one broken hash. normalize_iocs.py cleans it.
+# ============================================================================
+
+# --- File hashes (VirusTotal, Elastic) ---
+ED01EBFBC9EB5BBEA545AF4D01BF5F1071661840480439C6E5BABE8E080E41AA   # VirusTotal | file=tasksche.exe
+84c82835a5d21bbcf75a61706d8ab549                                    # VirusTotal | file=tasksche.exe
+5ff465afaabcbf0150d1a3ab2c2e74f3a4426467                            # VirusTotal | file=tasksche.exe
+  24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c  # Elastic | file=mssecsvc.exe
+Db349b97c37d22f5ea1d1841e3c89eb4                                    # Elastic | file=mssecsvc.exe
+7bf2b57f2a205768755c07f238fb32cc                                    # Elastic | file=@WanaDecryptor@.exe
+ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41aa    # Maltego | file=tasksche.exe
+ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41a     # copy-paste error: 63 chars
+
+# --- Kill-switch domains (defanged in reports) ---
+hxxp://www[.]iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea[.]com          # Elastic | role=killswitch
+iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com                          # Maltego | role=killswitch
+IFFERFSODP9IFJAPOSDFJHGOSURIJFAEWRWERGWEA[.]COM                        # Maltego (variant 2, registered by M. Suiche) | role=killswitch
+
+# --- Tor C2 (.onion) ---
+gx7ekbenv2riucmf.onion        # Elastic
+57g7spgrzlojinas.onion        # Elastic
+xxlvbrloxvriy2c5.onion        # Elastic
+76jdd2ir2embyv47.onion        # Elastic
+cwwnhwhlz52maqm7.onion        # Elastic
+GX7EKBENV2RIUCMF.ONION        # Maltego
+
+# --- Ransom Bitcoin wallets (case-sensitive! must NOT be lower-cased) ---
+13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94    # Elastic
+12t9YDPgwueZ9NyMgw519p7AA8isjr6SMw    # Elastic
+115p7UMMngoj1pMvkpHijcRdfJNXj6LrLn    # Elastic
+
+# --- Vulnerabilities ---
+CVE-2017-0144      # Microsoft MS17-010 (EternalBlue)
+cve-2017-0147      # VirusTotal tag
+CVE-2017-0144      # MITRE ATT&CK S0366
+
+# --- Host artifacts ---
+mutex:MsWinZonesCacheCounterMutexA     # Vendor reports
+
+# --- Benign noise seen in sandbox "contacted domains/IPs" (must be filtered) ---
+8.8.8.8                    # VirusTotal sandbox (Google DNS)
+www.microsoft.com          # VirusTotal sandbox
+time.windows.com           # VirusTotal sandbox

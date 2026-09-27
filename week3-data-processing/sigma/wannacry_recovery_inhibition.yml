@@ -1,0 +1,54 @@
+title: WannaCry-Style Recovery Inhibition and Permission Change
+id: a949a483-602b-49c9-84fb-9e34d8f099e8
+status: experimental
+description: |
+    Detects the command lines WannaCry runs before and during encryption:
+    deleting Volume Shadow Copies / the backup catalog (vssadmin, wmic, wbadmin),
+    disabling boot recovery (bcdedit), and granting Everyone full control on the
+    working directory (icacls). Built from IOCs processed in Week 3.
+    Behaviour-based (TTP level of the Pyramid of Pain), so it also catches recompiled variants
+    whose hashes are unknown.
+references:
+    - https://attack.mitre.org/software/S0366/
+    - https://www.elastic.co/blog/wcrywanacry-ransomware-technical-analysis
+author: CTI Lazarus Group project team
+date: 2026-09-27
+tags:
+    - attack.impact
+    - attack.t1490
+    - attack.defense-evasion
+    - attack.t1222.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_vssadmin:
+        Image|endswith: '\vssadmin.exe'
+        CommandLine|contains|all:
+            - 'delete'
+            - 'shadows'
+    selection_wmic:
+        Image|endswith: '\wmic.exe'
+        CommandLine|contains|all:
+            - 'shadowcopy'
+            - 'delete'
+    selection_wbadmin:
+        Image|endswith: '\wbadmin.exe'
+        CommandLine|contains|all:
+            - 'delete'
+            - 'catalog'
+    selection_bcdedit:
+        Image|endswith: '\bcdedit.exe'
+        CommandLine|contains:
+            - 'recoveryenabled no'
+            - 'bootstatuspolicy ignoreallfailures'
+    selection_icacls:
+        Image|endswith: '\icacls.exe'
+        CommandLine|contains|all:
+            - '/grant'
+            - 'Everyone:F'
+            - '/T'
+    condition: 1 of selection_*
+falsepositives:
+    - Legitimate backup or system-administration scripts (rare for shadow-copy deletion)
+level: high

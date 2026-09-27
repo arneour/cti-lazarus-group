@@ -1,0 +1,20 @@
+type,category,value,to_ids,comment,object,source
+sha256,Payload delivery,ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41aa,true,WannaCry component tasksche.exe,file:tasksche.exe,VirusTotal; Maltego
+md5,Payload delivery,84c82835a5d21bbcf75a61706d8ab549,true,WannaCry component tasksche.exe,file:tasksche.exe,VirusTotal
+sha1,Payload delivery,5ff465afaabcbf0150d1a3ab2c2e74f3a4426467,true,WannaCry component tasksche.exe,file:tasksche.exe,VirusTotal
+sha256,Payload delivery,24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c,true,WannaCry component mssecsvc.exe,file:mssecsvc.exe,Elastic
+md5,Payload delivery,db349b97c37d22f5ea1d1841e3c89eb4,true,WannaCry component mssecsvc.exe,file:mssecsvc.exe,Elastic
+md5,Payload delivery,7bf2b57f2a205768755c07f238fb32cc,true,WannaCry component @WanaDecryptor@.exe,file:@WanaDecryptor@.exe,Elastic
+domain,Network activity,iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com,false,WannaCry kill-switch domain (sinkholed). DO NOT BLOCK: blocking re-enables encryption. Monitor DNS lookups instead.,,Elastic; Maltego
+domain,Network activity,ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.com,false,WannaCry kill-switch domain (sinkholed). DO NOT BLOCK: blocking re-enables encryption. Monitor DNS lookups instead.,,"Maltego (variant 2, registered by M. Suiche)"
+domain,Network activity,gx7ekbenv2riucmf.onion,true,Tor hidden-service C2 (reachable only via Tor),,Elastic; Maltego
+domain,Network activity,57g7spgrzlojinas.onion,true,Tor hidden-service C2 (reachable only via Tor),,Elastic
+domain,Network activity,xxlvbrloxvriy2c5.onion,true,Tor hidden-service C2 (reachable only via Tor),,Elastic
+domain,Network activity,76jdd2ir2embyv47.onion,true,Tor hidden-service C2 (reachable only via Tor),,Elastic
+domain,Network activity,cwwnhwhlz52maqm7.onion,true,Tor hidden-service C2 (reachable only via Tor),,Elastic
+btc,Financial fraud,13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94,true,Hard-coded ransom wallet,,Elastic
+btc,Financial fraud,12t9YDPgwueZ9NyMgw519p7AA8isjr6SMw,true,Hard-coded ransom wallet,,Elastic
+btc,Financial fraud,115p7UMMngoj1pMvkpHijcRdfJNXj6LrLn,true,Hard-coded ransom wallet,,Elastic
+vulnerability,External analysis,CVE-2017-0144,false,SMBv1 remote code execution (MS17-010) - exploited by EternalBlue,,Microsoft MS17-010 (EternalBlue); MITRE ATT&CK S0366
+vulnerability,External analysis,CVE-2017-0147,false,SMBv1 information disclosure (MS17-010),,VirusTotal tag
+mutex,Artifacts dropped,MsWinZonesCacheCounterMutexA,true,WannaCry mutex,,Vendor reports

@@ -1,0 +1,330 @@
+{
+  "Event": {
+    "uuid": "f70997e9-64ec-4cca-943e-260b588ecffb",
+    "Attribute": [
+      {
+        "uuid": "893cc9ab-8bf8-4028-b6e0-d873634ed503",
+        "Tag": [
+          {
+            "name": "kill-switch"
+          }
+        ],
+        "type": "domain",
+        "value": "iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com",
+        "category": "Network activity",
+        "to_ids": false,
+        "disable_correlation": false,
+        "comment": "WannaCry kill-switch domain (sinkholed). DO NOT BLOCK: blocking re-enables encryption. Monitor DNS lookups instead. | source: Elastic; Maltego"
+      },
+      {
+        "uuid": "dfc01733-09d2-462f-b4e5-96aac4211405",
+        "Tag": [
+          {
+            "name": "kill-switch"
+          }
+        ],
+        "type": "domain",
+        "value": "ifferfsodp9ifjaposdfjhgosurijfaewrwergwea.com",
+        "category": "Network activity",
+        "to_ids": false,
+        "disable_correlation": false,
+        "comment": "WannaCry kill-switch domain (sinkholed). DO NOT BLOCK: blocking re-enables encryption. Monitor DNS lookups instead. | source: Maltego (variant 2, registered by M. Suiche)"
+      },
+      {
+        "uuid": "65f21453-96b1-475a-bc8e-3f90c124ad7c",
+        "Tag": [
+          {
+            "name": "tor:c2"
+          }
+        ],
+        "type": "domain",
+        "value": "gx7ekbenv2riucmf.onion",
+        "category": "Network activity",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Tor hidden-service C2 (reachable only via Tor) | source: Elastic; Maltego"
+      },
+      {
+        "uuid": "2eefdd24-8e8b-4d55-a01e-cbc4d23090bc",
+        "Tag": [
+          {
+            "name": "tor:c2"
+          }
+        ],
+        "type": "domain",
+        "value": "57g7spgrzlojinas.onion",
+        "category": "Network activity",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Tor hidden-service C2 (reachable only via Tor) | source: Elastic"
+      },
+      {
+        "uuid": "1540f3c4-1e92-4e2d-b4b5-f41a9c175a31",
+        "Tag": [
+          {
+            "name": "tor:c2"
+          }
+        ],
+        "type": "domain",
+        "value": "xxlvbrloxvriy2c5.onion",
+        "category": "Network activity",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Tor hidden-service C2 (reachable only via Tor) | source: Elastic"
+      },
+      {
+        "uuid": "71dfcc0e-ac69-4f2e-8300-864592f131dc",
+        "Tag": [
+          {
+            "name": "tor:c2"
+          }
+        ],
+        "type": "domain",
+        "value": "76jdd2ir2embyv47.onion",
+        "category": "Network activity",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Tor hidden-service C2 (reachable only via Tor) | source: Elastic"
+      },
+      {
+        "uuid": "7ac19f6a-8b60-405c-8419-de11fbfd5ced",
+        "Tag": [
+          {
+            "name": "tor:c2"
+          }
+        ],
+        "type": "domain",
+        "value": "cwwnhwhlz52maqm7.onion",
+        "category": "Network activity",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Tor hidden-service C2 (reachable only via Tor) | source: Elastic"
+      },
+      {
+        "uuid": "2d36567a-4f3e-4409-ad65-a014fd132e2f",
+        "type": "btc",
+        "value": "13AM4VW2dhxYgXeQepoHkHSQuy6NgaEb94",
+        "category": "Financial fraud",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Hard-coded ransom wallet | source: Elastic"
+      },
+      {
+        "uuid": "72c38ad4-ff22-4cb0-84e0-af97f8de6a92",
+        "type": "btc",
+        "value": "12t9YDPgwueZ9NyMgw519p7AA8isjr6SMw",
+        "category": "Financial fraud",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Hard-coded ransom wallet | source: Elastic"
+      },
+      {
+        "uuid": "ca590797-8a6c-4d98-ae7b-f59d4c33baf7",
+        "type": "btc",
+        "value": "115p7UMMngoj1pMvkpHijcRdfJNXj6LrLn",
+        "category": "Financial fraud",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "Hard-coded ransom wallet | source: Elastic"
+      },
+      {
+        "uuid": "c9935fb9-8e76-4301-9187-fea613bc8aae",
+        "type": "vulnerability",
+        "value": "CVE-2017-0144",
+        "category": "External analysis",
+        "to_ids": false,
+        "disable_correlation": false,
+        "comment": "SMBv1 remote code execution (MS17-010) - exploited by EternalBlue | source: Microsoft MS17-010 (EternalBlue); MITRE ATT&CK S0366"
+      },
+      {
+        "uuid": "35258581-8e52-4eb6-a5f4-c93fe3f44d18",
+        "type": "vulnerability",
+        "value": "CVE-2017-0147",
+        "category": "External analysis",
+        "to_ids": false,
+        "disable_correlation": false,
+        "comment": "SMBv1 information disclosure (MS17-010) | source: VirusTotal tag"
+      },
+      {
+        "uuid": "9af30ba3-3db5-46c0-8f8e-61a0eea24420",
+        "type": "mutex",
+        "value": "MsWinZonesCacheCounterMutexA",
+        "category": "Artifacts dropped",
+        "to_ids": true,
+        "disable_correlation": false,
+        "comment": "WannaCry mutex | source: Vendor reports"
+      }
+    ],
+    "Object": [
+      {
+        "name": "file",
+        "meta-category": "file",
+        "template_uuid": "688c46fb-5edb-40a3-8273-1af7923e2215",
+        "description": "File object describing a file with meta-information",
+        "template_version": "25",
+        "uuid": "6644e4dd-369b-41d5-af9b-2d9cc409e1a4",
+        "Attribute": [
+          {
+            "uuid": "afc99e23-d25e-496a-91eb-eac16f9175d8",
+            "object_relation": "filename",
+            "value": "tasksche.exe",
+            "type": "filename",
+            "category": "Payload delivery",
+            "disable_correlation": true,
+            "to_ids": false
+          },
+          {
+            "uuid": "1f46f283-da04-47fa-a524-c8e4840ce040",
+            "object_relation": "sha256",
+            "value": "ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41aa",
+            "type": "sha256",
+            "disable_correlation": false,
+            "to_ids": true,
+            "category": "Payload delivery",
+            "comment": "source: VirusTotal; Maltego"
+          },
+          {
+            "uuid": "06bc5d4a-95ae-4311-98e0-70e5bfbbf843",
+            "object_relation": "md5",
+            "value": "84c82835a5d21bbcf75a61706d8ab549",
+            "type": "md5",
+            "disable_correlation": false,
+            "to_ids": true,
+            "category": "Payload delivery",
+            "comment": "source: VirusTotal"
+          },
+          {
+            "uuid": "84a33fa1-2467-40f6-acc7-e1324aac85d8",
+            "object_relation": "sha1",
+            "value": "5ff465afaabcbf0150d1a3ab2c2e74f3a4426467",
+            "type": "sha1",
+            "disable_correlation": false,
+            "to_ids": true,
+            "category": "Payload delivery",
+            "comment": "source: VirusTotal"
+          }
+        ],
+        "distribution": "5",
+        "sharing_group_id": "0",
+        "comment": "WannaCry component tasksche.exe"
+      },
+      {
+        "name": "file",
+        "meta-category": "file",
+        "template_uuid": "688c46fb-5edb-40a3-8273-1af7923e2215",
+        "description": "File object describing a file with meta-information",
+        "template_version": "25",
+        "uuid": "3aa8d080-5b62-454b-b078-2fec50401a50",
+        "Attribute": [
+          {
+            "uuid": "cc252473-f739-4da0-8110-4790d530ffc1",
+            "object_relation": "filename",
+            "value": "mssecsvc.exe",
+            "type": "filename",
+            "category": "Payload delivery",
+            "disable_correlation": true,
+            "to_ids": false
+          },
+          {
+            "uuid": "0d3e6ad9-0cd9-44df-a2ca-5cdf8b3d2dd6",
+            "object_relation": "sha256",
+            "value": "24d004a104d4d54034dbcffc2a4b19a11f39008a575aa614ea04703480b1022c",
+            "type": "sha256",
+            "disable_correlation": false,
+            "to_ids": true,
+            "category": "Payload delivery",
+            "comment": "source: Elastic"
+          },
+          {
+            "uuid": "e1a1fd37-d9ee-43f5-aa25-fccd71631ad1",
+            "object_relation": "md5",
+            "value": "db349b97c37d22f5ea1d1841e3c89eb4",
+            "type": "md5",
+            "disable_correlation": false,
+            "to_ids": true,
+            "category": "Payload delivery",
+            "comment": "source: Elastic"
+          }
+        ],
+        "distribution": "5",
+        "sharing_group_id": "0",
+        "comment": "WannaCry component mssecsvc.exe"
+      },
+      {
+        "name": "file",
+        "meta-category": "file",
+        "template_uuid": "688c46fb-5edb-40a3-8273-1af7923e2215",
+        "description": "File object describing a file with meta-information",
+        "template_version": "25",
+        "uuid": "9ebd06e8-f770-4e82-805d-c8aa6744dc1a",
+        "Attribute": [
+          {
+            "uuid": "ffbfc713-4374-4f3f-9613-20d4ff657a9e",
+            "object_relation": "filename",
+            "value": "@WanaDecryptor@.exe",
+            "type": "filename",
+            "category": "Payload delivery",
+            "disable_correlation": true,
+            "to_ids": false
+          },
+          {
+            "uuid": "de942c14-abcd-49b3-8665-2cb09289ac6d",
+            "object_relation": "md5",
+            "value": "7bf2b57f2a205768755c07f238fb32cc",
+            "type": "md5",
+            "disable_correlation": false,
+            "to_ids": true,
+            "category": "Payload delivery",
+            "comment": "source: Elastic"
+          }
+        ],
+        "distribution": "5",
+        "sharing_group_id": "0",
+        "comment": "WannaCry component @WanaDecryptor@.exe"
+      }
+    ],
+    "Tag": [
+      {
+        "name": "tlp:clear"
+      },
+      {
+        "name": "misp-galaxy:threat-actor=\"Lazarus Group\""
+      },
+      {
+        "name": "misp-galaxy:mitre-intrusion-set=\"Lazarus Group - G0032\""
+      },
+      {
+        "name": "misp-galaxy:ransomware=\"WannaCry\""
+      },
+      {
+        "name": "misp-galaxy:mitre-malware=\"WannaCry - S0366\""
+      },
+      {
+        "name": "misp-galaxy:mitre-attack-pattern=\"Exploitation of Remote Services - T1210\""
+      },
+      {
+        "name": "misp-galaxy:mitre-attack-pattern=\"Data Encrypted for Impact - T1486\""
+      },
+      {
+        "name": "misp-galaxy:mitre-attack-pattern=\"Inhibit System Recovery - T1490\""
+      },
+      {
+        "name": "misp-galaxy:mitre-attack-pattern=\"Multi-hop Proxy - T1090.003\""
+      },
+      {
+        "name": "misp-galaxy:mitre-attack-pattern=\"Windows Service - T1543.003\""
+      },
+      {
+        "name": "misp-galaxy:mitre-attack-pattern=\"Windows Permissions - T1222.001\""
+      },
+      {
+        "name": "misp-galaxy:mitre-attack-pattern=\"Hidden Files and Directories - T1564.001\""
+      }
+    ],
+    "info": "WannaCry ransomware (Lazarus Group) - OSINT IOC collection [CTI course project]",
+    "date": "2017-05-12",
+    "threat_level_id": "1",
+    "analysis": "2",
+    "distribution": "0"
+  }
+}

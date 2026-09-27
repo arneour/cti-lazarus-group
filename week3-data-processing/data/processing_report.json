@@ -1,0 +1,48 @@
+{
+  "input": "raw_iocs.txt",
+  "output": "normalized_iocs.csv",
+  "statistics": {
+    "raw_lines": 27,
+    "modified_by_normalization": 8,
+    "duplicates_merged": 4,
+    "rejected": 1,
+    "filtered_benign": 3,
+    "clean_iocs": 19
+  },
+  "by_type": {
+    "sha256": 2,
+    "md5": 3,
+    "sha1": 1,
+    "domain": 7,
+    "btc": 3,
+    "vulnerability": 2,
+    "mutex": 1
+  },
+  "rejected": [
+    {
+      "line": 17,
+      "value": "ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41a",
+      "reason": "hash-like value with invalid length"
+    }
+  ],
+  "filtered": [
+    {
+      "line": 46,
+      "type": "ip-dst",
+      "value": "8.8.8.8",
+      "reason": "known benign (allowlist)"
+    },
+    {
+      "line": 47,
+      "type": "domain",
+      "value": "microsoft.com",
+      "reason": "known benign (allowlist)"
+    },
+    {
+      "line": 48,
+      "type": "domain",
+      "value": "time.windows.com",
+      "reason": "known benign (allowlist)"
+    }
+  ]
+}
