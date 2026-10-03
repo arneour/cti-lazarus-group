@@ -4,11 +4,11 @@
 **Group topic:** Lazarus Group — North Korean state-sponsored APT (MITRE ATT&CK [G0032](https://attack.mitre.org/groups/G0032/))
 **Case study:** WannaCry ransomware, May 2017 (MITRE ATT&CK [S0366](https://attack.mitre.org/software/S0366/))
 
-| Member | Role |
+| Member |  |
 |---|---|
-| TODO: Name Surname | Research / documentation |
-| TODO: Name Surname | Tools (VirusTotal, Shodan, Maltego) |
-| TODO: Name Surname | MISP deployment / scripts |
+| TODO: Arnur Seidilla |
+| TODO: Mukamet Valihan | 
+| TODO: Nurkhat Zholseit |
 
 > All data in this repository comes from **public, open sources** (TLP:CLEAR).
 > No malware samples are stored here, and no third-party hosts were scanned or contacted.
