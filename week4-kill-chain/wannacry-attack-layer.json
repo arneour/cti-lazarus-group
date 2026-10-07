@@ -1,0 +1,299 @@
+{
+  "name": "WannaCry (S0366) - Kill Chain mapping",
+  "versions": {
+    "attack": "19",
+    "navigator": "5.1.0",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Week 4: WannaCry 2017 mapped to Lockheed Martin Cyber Kill Chain stages. Score = Kill Chain stage (1-7).",
+  "filters": {
+    "platforms": [
+      "Windows",
+      "PRE"
+    ]
+  },
+  "sorting": 0,
+  "layout": {
+    "layout": "side",
+    "showID": true,
+    "showName": true,
+    "aggregateFunction": "average"
+  },
+  "hideDisabled": false,
+  "techniques": [
+    {
+      "techniqueID": "T1595.001",
+      "score": 1,
+      "color": "#c6dbef",
+      "comment": "Kill Chain stage 1-Reconnaissance: Random IPv4 scanning on TCP/445 [analyst mapping, not in S0366]",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1016",
+      "score": 1,
+      "color": "#c6dbef",
+      "comment": "Kill Chain stage 1-Reconnaissance: Determines local subnet to scan",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1018",
+      "score": 1,
+      "color": "#c6dbef",
+      "comment": "Kill Chain stage 1-Reconnaissance: Scans local segment for exploitable hosts",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1588.005",
+      "score": 2,
+      "color": "#9ecae1",
+      "comment": "Kill Chain stage 2-Weaponization: Leaked EternalBlue/DoublePulsar (Shadow Brokers, Apr 2017) [analyst mapping, not in S0366]",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1587.001",
+      "score": 2,
+      "color": "#9ecae1",
+      "comment": "Kill Chain stage 2-Weaponization: Worm mssecsvc.exe with embedded encryptor tasksche.exe [analyst mapping, not in S0366]",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1190",
+      "score": 3,
+      "color": "#6baed6",
+      "comment": "Kill Chain stage 3-Delivery: Initial infection via internet-exposed SMBv1 (TCP/445) [analyst mapping, not in S0366]",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1570",
+      "score": 3,
+      "color": "#6baed6",
+      "comment": "Kill Chain stage 3-Delivery: Copies payload to newly exploited host",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1210",
+      "score": 4,
+      "color": "#fdae6b",
+      "comment": "Kill Chain stage 4-Exploitation: EternalBlue CVE-2017-0144 (MS17-010)",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1563.002",
+      "score": 4,
+      "color": "#fdae6b",
+      "comment": "Kill Chain stage 4-Exploitation: Runs decryptor in each RDP session (taskse.exe)",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1543.003",
+      "score": 5,
+      "color": "#fd8d3c",
+      "comment": "Kill Chain stage 5-Installation: Service mssecsvc2.0, 'mssecsvc.exe -m security'",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1564.001",
+      "score": 5,
+      "color": "#fd8d3c",
+      "comment": "Kill Chain stage 5-Installation: attrib +h on working directory",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1222.001",
+      "score": 5,
+      "color": "#fd8d3c",
+      "comment": "Kill Chain stage 5-Installation: icacls . /grant Everyone:F /T /C /Q",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1547.001",
+      "score": 5,
+      "color": "#fd8d3c",
+      "comment": "Kill Chain stage 5-Installation: Run key for @WanaDecryptor@.exe [analyst mapping, not in S0366]",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1090.003",
+      "score": 6,
+      "color": "#e6550d",
+      "comment": "Kill Chain stage 6-C2: Tor client taskhsvc.exe to .onion C2",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1573.002",
+      "score": 6,
+      "color": "#e6550d",
+      "comment": "Kill Chain stage 6-C2: Custom encrypted protocol over Tor",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1071.001",
+      "score": 6,
+      "color": "#e6550d",
+      "comment": "Kill Chain stage 6-C2: Kill-switch HTTP check to iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com [analyst mapping, not in S0366]",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1083",
+      "score": 7,
+      "color": "#a50f15",
+      "comment": "Kill Chain stage 7-Actions on Objectives: Finds files by extension (176 types)",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1120",
+      "score": 7,
+      "color": "#a50f15",
+      "comment": "Kill Chain stage 7-Actions on Objectives: Finds removable and mapped drives",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1489",
+      "score": 7,
+      "color": "#a50f15",
+      "comment": "Kill Chain stage 7-Actions on Objectives: Kills SQL Server, Exchange, MySQL",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1486",
+      "score": 7,
+      "color": "#a50f15",
+      "comment": "Kill Chain stage 7-Actions on Objectives: AES-128 + RSA-2048 encryption, .WNCRY",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1490",
+      "score": 7,
+      "color": "#a50f15",
+      "comment": "Kill Chain stage 7-Actions on Objectives: vssadmin, wbadmin, bcdedit",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1047",
+      "score": 7,
+      "color": "#a50f15",
+      "comment": "Kill Chain stage 7-Actions on Objectives: wmic shadowcopy delete",
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1071",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1090",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1222",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1543",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1547",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1563",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1564",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1573",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1587",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1588",
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1595",
+      "enabled": true,
+      "showSubtechniques": true
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#ffffff",
+      "#a50f15"
+    ],
+    "minValue": 0,
+    "maxValue": 7
+  },
+  "legendItems": [
+    {
+      "label": "1-Reconnaissance",
+      "color": "#c6dbef"
+    },
+    {
+      "label": "2-Weaponization",
+      "color": "#9ecae1"
+    },
+    {
+      "label": "3-Delivery",
+      "color": "#6baed6"
+    },
+    {
+      "label": "4-Exploitation",
+      "color": "#fdae6b"
+    },
+    {
+      "label": "5-Installation",
+      "color": "#fd8d3c"
+    },
+    {
+      "label": "6-C2",
+      "color": "#e6550d"
+    },
+    {
+      "label": "7-Actions on Objectives",
+      "color": "#a50f15"
+    }
+  ],
+  "showTacticRowBackground": true,
+  "tacticRowBackground": "#dddddd",
+  "selectTechniquesAcrossTactics": true,
+  "selectSubtechniquesWithParent": false
+}
