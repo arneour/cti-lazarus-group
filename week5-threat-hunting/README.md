@@ -101,7 +101,7 @@ JSON files. Its full output is in [`results/hunt_results.md`](results/hunt_resul
 
 `lab/data/` is not committed (`.gitignore`): anyone can re-download it with the script.
 
-![docker compose ps](images/docker-ps.png)
+![ELK lab running in Docker](images/docker-ps.png)
 ![Data loaded into Elasticsearch](images/es-indices.png)
 
 ---
@@ -330,8 +330,8 @@ tables in this README use UTC.
 
 | File | What |
 |---|---|
-| `docker-ps.png` | `docker compose ps` with Elasticsearch and Kibana healthy |
-| `es-indices.png` | Output of `load_to_elastic.py` |
+| `docker-ps.png` | Docker Desktop: compose project `lab` (Elasticsearch + Kibana) running |
+| `es-indices.png` | `_cat/indices`: 3 indices, 23,258 events loaded |
 | `h1-stacking.png` | H1.1 stack count |
 | `h1-flags.png` | H1.2 launcher flags |
 | `h1-scriptblock.png` | H1.3 script blocks |
