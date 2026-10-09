@@ -1,0 +1,54 @@
+// =====================================================================
+// HUNT H1 (hypothesis-driven): suspicious PowerShell execution
+// Hypothesis: "An adversary like Lazarus (G0032, T1059.001) runs PowerShell
+// launched by a non-standard parent, with hidden window and encoded command,
+// and the script block contains download / decode logic."
+// Kibana -> Discover -> "Try ES|QL" -> paste ONE query at a time.
+// =====================================================================
+
+// ---- H1.1  Stack counting: who starts PowerShell? (rare parents first)
+FROM hunt-otrf-*
+| WHERE EventID == 1 AND ENDS_WITH(TO_LOWER(Image), "powershell.exe")
+| STATS executions = COUNT(*), hosts = COUNT_DISTINCT(Hostname) BY ParentImage, User
+| SORT executions ASC
+
+// ---- H1.2  Command-line flags typical for launchers
+FROM hunt-otrf-*
+| WHERE EventID == 1 AND ENDS_WITH(TO_LOWER(Image), "powershell.exe")
+| EVAL cmd = TO_LOWER(CommandLine), cmd_len = LENGTH(CommandLine)
+| EVAL encoded = cmd LIKE "* -enc*" OR cmd LIKE "*-encodedcommand*",
+       hidden  = cmd LIKE "*-w 1*" OR cmd LIKE "*-w hidden*" OR cmd LIKE "*-windowstyle hidden*",
+       noprofile = cmd LIKE "*-nop*"
+| WHERE encoded OR hidden
+| KEEP @timestamp, Hostname, User, ParentImage, cmd_len, encoded, hidden, noprofile
+| SORT @timestamp
+
+// ---- H1.3  Script Block Logging (4104): what actually ran after decoding
+FROM hunt-otrf-*
+| WHERE EventID == 4104
+| EVAL sb = TO_LOWER(ScriptBlockText)
+| EVAL web = sb LIKE "*net.webclient*" OR sb LIKE "*downloaddata*" OR sb LIKE "*downloadstring*",
+       decode = sb LIKE "*frombase64string*" OR sb LIKE "*-bxor*",
+       exec = sb LIKE "*iex*" OR sb LIKE "*invoke-expression*"
+| WHERE web OR decode
+| KEEP @timestamp, Hostname, web, decode, exec, ScriptBlockId
+| SORT @timestamp
+
+// ---- H1.4  What did the suspicious PowerShell spawn? (post-exploitation)
+FROM hunt-otrf-*
+| WHERE EventID == 1 AND ENDS_WITH(TO_LOWER(ParentImage), "powershell.exe")
+| STATS n = COUNT(*) BY Hostname, User, Image
+| SORT n ASC
+
+// ---- H1.5  Pivot: how did PowerShell start as SYSTEM? -> new services
+FROM hunt-otrf-*
+| WHERE EventID == 7045
+| EVAL path = TO_LOWER(ImagePath)
+| EVAL script_in_service = path LIKE "*powershell*" OR path LIKE "*%comspec%*" OR path LIKE "*cmd*/c*"
+| KEEP @timestamp, Hostname, ServiceName, StartType, AccountName, script_in_service
+
+// ---- H1.6  Does PowerShell talk to the network? (possible C2)
+FROM hunt-otrf-*
+| WHERE EventID == 3 AND ENDS_WITH(TO_LOWER(Image), "powershell.exe") AND Initiated == "true"
+| STATS connections = COUNT(*), first_seen = MIN(@timestamp) BY Hostname, DestinationIp, DestinationPort
+| SORT first_seen

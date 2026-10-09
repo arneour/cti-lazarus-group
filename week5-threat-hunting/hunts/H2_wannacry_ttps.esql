@@ -1,0 +1,56 @@
+// =====================================================================
+// HUNT H2 (intel-driven): WannaCry / Lazarus TTPs from weeks 3-4
+// Source intel: our MISP event (week 3) and Kill Chain mapping (week 4).
+// We sweep from the bottom of the Pyramid of Pain (hashes, domain)
+// to the top (behaviour). Paste ONE query at a time.
+// =====================================================================
+
+// ---- H2.1  IOC sweep: WannaCry hashes (mssecsvc.exe, tasksche.exe)
+FROM hunt-otrf-*
+| WHERE EventID == 1
+| EVAL h = TO_UPPER(Hashes)
+| WHERE h LIKE "*24D004A104D4D54034DBCFFC2A4B19A11F39008A575AA614EA04703480B1022C*"
+     OR h LIKE "*ED01EBFBC9EB5BBEA545AF4D01BF5F1071661840480439C6E5BABE8E080E41AA*"
+| KEEP @timestamp, Hostname, Image, Hashes
+
+// ---- H2.2  IOC sweep: kill-switch domain in Sysmon DNS (EID 22)
+FROM hunt-otrf-*
+| WHERE EventID == 22 AND TO_LOWER(QueryName) LIKE "*iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea*"
+| KEEP @timestamp, Hostname, Image, QueryName
+
+// ---- H2.3  T1490 Inhibit System Recovery: every use of recovery tools
+FROM hunt-otrf-*
+| WHERE EventID == 1
+| EVAL img = TO_LOWER(Image), cmd = TO_LOWER(CommandLine)
+| WHERE ENDS_WITH(img, "vssadmin.exe") OR ENDS_WITH(img, "wbadmin.exe")
+     OR ENDS_WITH(img, "bcdedit.exe") OR (ENDS_WITH(img, "wmic.exe") AND cmd LIKE "*shadowcopy*")
+| EVAL destructive = cmd LIKE "*delete*" OR cmd LIKE "*recoveryenabled no*" OR cmd LIKE "*resize shadowstorage*"
+| KEEP @timestamp, Hostname, User, ParentImage, CommandLine, destructive
+
+// ---- H2.4  T1222.001 / T1564.001: icacls Everyone:F, attrib +h
+FROM hunt-otrf-*
+| WHERE EventID == 1
+| EVAL cmd = TO_LOWER(CommandLine)
+| WHERE (ENDS_WITH(TO_LOWER(Image), "icacls.exe") AND cmd LIKE "*everyone:f*")
+     OR (ENDS_WITH(TO_LOWER(Image), "attrib.exe") AND cmd LIKE "*+h*")
+| KEEP @timestamp, Hostname, User, CommandLine
+
+// ---- H2.5  T1543.003: new services (WannaCry = mssecsvc2.0 "-m security")
+FROM hunt-otrf-*
+| WHERE EventID == 7045
+| EVAL wannacry_like = ServiceName == "mssecsvc2.0" OR TO_LOWER(ImagePath) LIKE "*-m security*"
+| KEEP @timestamp, Hostname, ServiceName, wannacry_like
+
+// ---- H2.6  T1210 worm behaviour: one process talking to many hosts on 445
+FROM hunt-otrf-*
+| WHERE EventID == 3 AND DestinationPort == "445" AND Initiated == "true"
+| STATS connections = COUNT(*), targets = COUNT_DISTINCT(DestinationIp) BY Hostname, Image
+| SORT targets DESC
+// WannaCry would show tens/hundreds of targets per minute from one process.
+
+// ---- H2.7  Triage of the H2.3 hit: did someone copy the AD database out of the shadow copy?
+FROM hunt-otrf-*
+| WHERE (EventID == 1 AND User == "PANDALAB\\Administrator" AND ENDS_WITH(TO_LOWER(ParentImage), "cmd.exe"))
+     OR (EventID == 11 AND (TO_LOWER(TargetFilename) LIKE "*ntds.dit*" OR TO_LOWER(TargetFilename) LIKE "*system_hive*"))
+| KEEP @timestamp, EventID, Hostname, Image, CommandLine, TargetFilename
+| SORT @timestamp

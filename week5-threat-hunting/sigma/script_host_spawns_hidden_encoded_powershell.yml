@@ -1,0 +1,46 @@
+title: Script Host Spawns Hidden Encoded PowerShell
+id: 3f0c2a9e-7b61-4f2d-9c55-1d8e6a0b4c21
+status: experimental
+description: |
+  Detects wscript/cscript/mshta starting PowerShell with an encoded command
+  and a hidden window. Built from the week 5 hunt H1 finding
+  (WORKSTATION5: launcher.vbs -> wscript.exe -> powershell -noP -sta -w 1 -enc).
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+  - https://attack.mitre.org/techniques/T1059/005/
+  - https://github.com/OTRF/Security-Datasets
+author: CTI Lazarus Group project (week 5)
+date: 2026-10-07
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.t1059.005
+  - attack.stealth
+  - attack.t1027.010
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  parent:
+    ParentImage|endswith:
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\mshta.exe'
+  child:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  encoded:
+    CommandLine|contains:
+      - ' -enc'
+      - ' -e '
+      - ' -encodedcommand'
+  hidden:
+    CommandLine|contains:
+      - ' -w 1'
+      - ' -w hidden'
+      - ' -windowstyle hidden'
+  condition: parent and child and (encoded or hidden)
+falsepositives:
+  - Legacy logon or admin scripts written in VBScript that call PowerShell (verify the .vbs path and signer)
+level: high
